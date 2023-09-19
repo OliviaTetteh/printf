@@ -12,20 +12,20 @@
 int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
-	int performance_print = 0;
-	va_list level_of_performance;
+	int output_print = 0;
+	va_list format_of_output;
 
 	if (format == 0)
 		return (-1);
 
-	va_start(level_of_performance, format);
+	va_start(format_of_output, format);
 
 	while (*format)
 	{
 		if (*format != '%')
 		{
 			write(1, format, 1);
-			performance_print++;
+			output_print++;
 		}
 		else
 		{
@@ -36,30 +36,44 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			write(1, format, 1);
-			performance_print++;
+			output_print++;
 		}
 		else if (*format == 'c')
 		{
-			char c = va_arg(level_of_performance, int);
+			char c = va_arg(format_of_output, int);
 
 			write(1, &c, 1);
-			performance_print++;
+			output_print++;
 		}
 		else if (*format == 's')
 		{
-			char *str = va_arg(level_of_performance, char*);
+			char *str = va_arg(format_of_output, char*);
 			int str_len = 0;
 
 			while (str[str_len] != '\0')
 				str_len++;
 
 			write(1, str, str_len);
-			performance_print += str_len;
-			}
+			output_print += str_len;
+		}
+		else if (*format == 'd')
+		{
+			char d = va_arg(format_of_output, int);
+
+			write(1, &d, 1);
+			output_print++;
+		}
+		else if (*format == 'i')
+		{
+			char i = va_arg(format_of_output, int);
+
+			write(1, &i, 1);
+			output_print++;
+		}
 		}
 	format++;
-}
-	va_end(level_of_performance);
+	}
+	va_end(format_of_output);
 
-	return (performance_print);
+	return (output_print);
 }
