@@ -1,6 +1,5 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
+
 
 /**
  * _printf - returns the number of char printed
@@ -15,7 +14,7 @@ int _printf(const char *format, ...)
 	int output_print = 0;
 	va_list format_of_output;
 
-	if (format == 0)
+	if (format == NULL)
 		return (-1);
 
 	va_start(format_of_output, format);
