@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdarg.h>
+#include <stdio.h>
 
 
 /**
@@ -55,23 +57,17 @@ int _printf(const char *format, ...)
 			write(1, str, str_len);
 			output_print += str_len;
 		}
-		else if (*format == 'd')
+		else if (*format == 'd' || *format == 'i')
 		{
-			char d = va_arg(format_of_output, int);
+			int num = va_arg(format_of_output, int);
 
-			write(1, &d, 1);
-			output_print++;
-		}
-		else if (*format == 'i')
-		{
-			char i = va_arg(format_of_output, int);
-
-			write(1, &i, 1);
+			printf("%d", num);
 			output_print++;
 		}
 		}
 	format++;
 	}
+
 	va_end(format_of_output);
 
 	return (output_print);
